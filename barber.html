@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Cuts Barbershop</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Amarna:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#d4af37',
+            dark: '#0e0e0e'
+          },
+          fontFamily: {
+            sek: ['Amarna', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-slide-up { animation: fadeSlideUp 1s ease forwards; }
+
+    @keyframes slideLeft {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    .slide-left { animation: slideLeft 1s ease forwards; }
+
+    @keyframes slideRight {
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    .slide-right { animation: slideRight 1s ease forwards; }
+
+    .hero-img { transition: transform 0.5s ease; }
+    .hero-img:hover { transform: scale(1.05); }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Scrollbar hide for testimonials carousel */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Animated text belt */
+    @keyframes textBelt {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .text-belt-container {
+      overflow: hidden;
+      white-space: nowrap;
+      background-color: #000;
+      padding: 2rem 0;
+    }
+    .text-belt {
+      display: inline-block;
+      animation: textBelt 15s linear infinite;
+      font-size: 2rem;
+      color: #d4af37;
+      font-weight: bold;
+      font-family: 'Amarna', sans-serif;
+      letter-spacing: 1rem;
+    }
+
+    /* Section spacing */
+    section { padding-top: 6rem; padding-bottom: 6rem; }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // IntersectionObserver for animations
+      const animatedItems = document.querySelectorAll('[data-animate]');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            entry.target.style.animationDelay = `${delay}ms`;
+            entry.target.classList.add(entry.target.dataset.animate);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      animatedItems.forEach(el => observer.observe(el));
+
+      // Mobile menu toggle
+      const menuBtn = document.querySelector("header button");
+      const nav = document.querySelector("header nav");
+      menuBtn.addEventListener("click", () => nav.classList.toggle("hidden"));
+
+      // Booking modal
+      const modal = document.getElementById('bookingModal');
+      document.querySelectorAll('.open-modal').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          modal.classList.remove('hidden');
+        });
+      });
+      modal.addEventListener('click', e => { if(e.target === modal) modal.classList.add('hidden'); });
+
+      // Existing fade-in observer
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      });
+      document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+    });
+  </script>
+</head>
+
+<body class="bg-dark text-white font-sek">
+
+  <!-- NAVBAR -->
+  <header class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+    <h1 class="text-2xl font-bold text-gold tracking-wide">ELITE CUTS BARBERSHOP</h1>
+    <nav class="hidden md:flex gap-8 text-sm">
+      <a href="#services" class="hover:text-gold transition-colors duration-300">Services</a>
+      <a href="#gallery" class="hover:text-gold transition-colors duration-300">Gallery</a>
+      <a href="#visit-us" class="hover:text-gold transition-colors duration-300">Visit Us</a>
+      <a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a>
+    </nav>
+    <button class="md:hidden text-sm">Menu</button>
+  </header>
+
+  <!-- HERO -->
+  <section class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('lvl4/hero-background.webp');">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-black/60 p-8 rounded-xl">
+      <div>
+        <h2 class="text-5xl md:text-6xl font-extrabold mb-6" data-animate="fade-slide-up" data-delay="0">
+          Welcome to Elite Cuts<br><span class="text-gold">Barbershop</span>
+        </h2>
+        <p class="text-gray-400 max-w-md mb-8" data-animate="fade-slide-up" data-delay="150">
+          Where Style Meets Precision – Experience the Art of Grooming.
+        </p>
+        <div class="flex gap-4" data-animate="fade-slide-up" data-delay="300">
+          <a href="#services" class="bg-gold text-dark px-7 py-4 rounded-xl font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">Explore Our Services</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-gray-800 h-64 rounded-xl bg-cover bg-center hero-img" data-animate="slide-left" data-delay="200" style="background-image: url('lvl4/before.png');"></div>
+        <div class="bg-gray-700 h-64 rounded-xl bg-cover bg-center hero-img" data-animate="slide-right" data-delay="400" style="background-image: url('lvl4/after.png');"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMATED TEXT BELT -->
+  <section class="text-belt-container">
+    <div class="text-belt">Cleaner    Better    Premium    Cleaner    Better    Premium    Better    Premium    Cleaner    Better    Premium</div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="px-6 py-24 bg-black bg-cover bg-center relative" style="background-image: url('lvl4/services.jpg');">
+    <h3 class="text-4xl font-bold text-center mb-16" data-animate="fade-slide-up" data-delay="0">Our Services</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <div class="border border-white/10 p-10 rounded-2xl bg-black/60" data-animate="fade-slide-up" data-delay="150">
+        <h4 class="text-gold text-xl mb-2">Precision Haircut</h4>
+        <p class="text-gray-400">Get a sharp, stylish haircut tailored to your face shape and personal style. Our expert barbers use the finest techniques for a look that lasts.</p>
+      </div>
+      <div class="border border-white/10 p-10 rounded-2xl bg-black/60" data-animate="fade-slide-up" data-delay="300">
+        <h4 class="text-gold text-xl mb-2">Beard Grooming</h4>
+        <p class="text-gray-400">Maintain your beard with professional trimming, shaping, and conditioning. Achieve that rugged yet refined appearance.</p>
+      </div>
+      <div class="border border-white/10 p-10 rounded-2xl bg-black/60" data-animate="fade-slide-up" data-delay="450">
+        <h4 class="text-gold text-xl mb-2">Classic Shave</h4>
+        <p class="text-gray-400">Indulge in a traditional hot towel shave for the smoothest skin. Relax and enjoy the ultimate grooming experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMATED TEXT BELT -->
+  <section class="text-belt-container">
+    <div class="text-belt">Cleaner    Better    Premium    Cleaner    Better    Premium    Better    Premium    Cleaner    Better    Premium</div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="px-6 py-24 bg-black">
+    <h3 class="text-4xl font-bold text-center mb-16" data-animate="fade-slide-up" data-delay="0">Our Gallery</h3>
+    <p class="text-center text-gray-400 mb-8" data-animate="fade-slide-up" data-delay="150">Check out some of our latest work and transformations. From fresh cuts to beard masterpieces, see the difference at Elite Cuts.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+      <img src="lvl4/galery1.jpg" alt="Gallery 1" class="w-full h-64 object-cover rounded-lg" data-animate="fade-slide-up" data-delay="300">
+      <img src="lvl4/galery2.jpg" alt="Gallery 2" class="w-full h-64 object-cover rounded-lg" data-animate="fade-slide-up" data-delay="450">
+      <img src="lvl4/galery3.jpg" alt="Gallery 3" class="w-full h-64 object-cover rounded-lg" data-animate="fade-slide-up" data-delay="600">
+      <img src="lvl4/galery4.jpg" alt="Gallery 4" class="w-full h-64 object-cover rounded-lg" data-animate="fade-slide-up" data-delay="750">
+    </div>
+  </section>
+
+  <!-- VISIT US -->
+  <section id="visit-us" class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('PLACEHOLDER_VISIT_BG');" data-animate="fade-slide-up" data-delay="0">
+    <div class="max-w-4xl mx-auto text-center bg-black/60 p-8 rounded-xl">
+      <h3 class="text-3xl font-bold mb-6">Visit Us</h3>
+      <p class="text-gray-400 mb-8">123 Main Street, Downtown City, ST 12345 · Open Daily</p>
+      <a href="#" class="open-modal bg-gold text-dark px-8 py-4 rounded-xl font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">Book via WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- ANIMATED TEXT BELT -->
+  <section class="text-belt-container">
+    <div class="text-belt">Cleaner    Better    Premium    Cleaner    Better    Premium    Better    Premium    Cleaner    Better    Premium</div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="px-6 py-24 bg-black">
+    <h3 class="text-4xl font-bold text-center mb-16" data-animate="fade-slide-up" data-delay="0">What Our Clients Say</h3>
+    <div class="max-w-6xl mx-auto overflow-hidden">
+      <div class="flex gap-8 no-scrollbar animate-pulse" style="width: calc(100% * 3); animation: scroll 20s linear infinite;">
+        <div class="flex-shrink-0 w-full flex gap-8">
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="150">
+            <img src="lvl4/before.png" alt="Client 1" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">John Doe</h4>
+            <p class="text-gray-400">"Elite Cuts transformed my look! The attention to detail is unmatched. Highly recommend!"</p>
+          </div>
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="300">
+            <img src="lvl4/after.png" alt="Client 2" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">Jane Smith</h4>
+            <p class="text-gray-400">"Best barber in town. Professional, friendly, and the results speak for themselves."</p>
+          </div>
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="450">
+            <img src="lvl4/about.webp" alt="Client 3" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">Mike Johnson</h4>
+            <p class="text-gray-400">"From beard to haircut, everything is top-notch. I won't go anywhere else."</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-full flex gap-8">
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="150">
+            <img src="lvl4/before.png" alt="Client 1" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">John Doe</h4>
+            <p class="text-gray-400">"Elite Cuts transformed my look! The attention to detail is unmatched. Highly recommend!"</p>
+          </div>
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="300">
+            <img src="lvl4/after.png" alt="Client 2" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">Jane Smith</h4>
+            <p class="text-gray-400">"Best barber in town. Professional, friendly, and the results speak for themselves."</p>
+          </div>
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="450">
+            <img src="lvl4/about.webp" alt="Client 3" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">Mike Johnson</h4>
+            <p class="text-gray-400">"From beard to haircut, everything is top-notch. I won't go anywhere else."</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-full flex gap-8">
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="150">
+            <img src="lvl4/before.png" alt="Client 1" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">John Doe</h4>
+            <p class="text-gray-400">"Elite Cuts transformed my look! The attention to detail is unmatched. Highly recommend!"</p>
+          </div>
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="300">
+            <img src="lvl4/after.png" alt="Client 2" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">Jane Smith</h4>
+            <p class="text-gray-400">"Best barber in town. Professional, friendly, and the results speak for themselves."</p>
+          </div>
+          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="450">
+            <img src="lvl4/about.webp" alt="Client 3" class="w-16 h-16 rounded-full mx-auto mb-4">
+            <h4 class="text-gold text-lg mb-2">Mike Johnson</h4>
+            <p class="text-gray-400">"From beard to haircut, everything is top-notch. I won't go anywhere else."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('PLACEHOLDER_CONTACT_BG');" data-animate="fade-slide-up" data-delay="0">
+    <div class="max-w-4xl mx-auto text-center bg-black/60 p-8 rounded-xl">
+      <h3 class="text-3xl font-bold mb-6">Contact Us</h3>
+      <p class="text-gray-400 mb-8">Have questions or need to book? Reach out to us.</p>
+      <a href="#" class="open-modal bg-gold text-dark px-8 py-4 rounded-xl font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">Book via WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- ANIMATED TEXT BELT -->
+  <section class="text-belt-container">
+    <div class="text-belt">Cleaner    Better    Premium    Cleaner    Better    Premium    Better    Premium    Cleaner    Better    Premium</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="px-6 py-8 border-t border-white/10 text-center text-sm text-gray-500">
+    © 2025 Elite Cuts Barbershop · All Rights Reserved
+    <div class="flex justify-center gap-6 mt-4">
+      <a href="#"><img src="instagram.svg" alt="Instagram" class="h-6"></a>
+      <a href="#"><img src="facebook.svg" alt="Facebook" class="h-6"></a>
+      <a href="#"><img src="whatsapp.svg" alt="WhatsApp" class="h-6"></a>
+    </div>
+  </footer>
+
+  <!-- BOOKING MODAL -->
+  <div id="bookingModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
+    <div class="bg-black p-8 rounded-xl max-w-md w-full">
+      <h3 class="text-2xl font-bold mb-4">Book Your Appointment</h3>
+      <form class="flex flex-col gap-4">
+        <input type="text" placeholder="Name" class="p-3 rounded-xl bg-gray-800 border border-white/10">
+        <input type="tel" placeholder="Phone" class="p-3 rounded-xl bg-gray-800 border border-white/10">
+        <button class="bg-gold text-dark p-3 rounded-xl font-semibold hover:scale-105 transition-transform">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Simple fade-in animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

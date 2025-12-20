@@ -410,13 +410,10 @@
 
     // Touch and mouse swipe/drag functionality
     let startX = 0;
-    let endX = 0;
     let isDragging = false;
-    let currentTranslate = 0;
+    let currentTranslate = 0; // in %
     let prevTranslate = 0;
-    const slideWidth = gallerySlider.parentElement.offsetWidth; // Width of one slide
-    const maxTranslate = 0; // Maximum translate (first slide)
-    const minTranslate = -(slideWidth * 3); // Minimum translate (last slide, 3 * width)
+    const slideWidth = gallerySlider.parentElement.offsetWidth;
 
     function startDrag(e) {
       isDragging = true;
@@ -430,18 +427,26 @@
       if (!isDragging) return;
       const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
       const deltaX = currentX - startX;
-      currentTranslate = prevTranslate + deltaX;
-      gallerySlider.style.transform = `translateX(${currentTranslate}px)`;
+      const deltaPercent = (deltaX / slideWidth) * 25; // 25% per slide
+      currentTranslate = prevTranslate - deltaPercent; // negative for left swipe
+      gallerySlider.style.transform = `translateX(${currentTranslate}%)`;
     }
 
     function endDrag(e) {
       if (!isDragging) return;
       isDragging = false;
       gallerySlider.style.transition = 'transform 0.5s ease';
-      // Snap to nearest slide
-      const targetSlide = Math.round(-currentTranslate / slideWidth);
-      currentSlide = Math.max(0, Math.min(3, targetSlide));
-      updateSlide();
+      const endX = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
+      const deltaX = startX - endX;
+      if (Math.abs(deltaX) > 50) {
+        if (deltaX > 0) {
+          nextSlide();
+        } else if (deltaX < 0) {
+          prevSlide();
+        }
+      } else {
+        updateSlide();
+      }
     }
 
     // Touch events

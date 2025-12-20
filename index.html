@@ -101,7 +101,6 @@
       display: flex;
       width: 400%;
       height: 100%;
-      transition: transform 0.5s ease;
     }
 
     .gallery-slide {
@@ -415,6 +414,9 @@
     let isDragging = false;
     let currentTranslate = 0;
     let prevTranslate = 0;
+    const slideWidth = gallerySlider.parentElement.offsetWidth; // Width of one slide
+    const maxTranslate = 0; // Maximum translate (first slide)
+    const minTranslate = -(slideWidth * 3); // Minimum translate (last slide, 3 * width)
 
     function startDrag(e) {
       isDragging = true;
@@ -435,19 +437,11 @@
     function endDrag(e) {
       if (!isDragging) return;
       isDragging = false;
-      gallerySlider.style.transition = 'transform 0.3s ease';
-      endX = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
-      const deltaX = startX - endX;
-
-      if (Math.abs(deltaX) > 50) { // Minimum swipe/drag distance
-        if (deltaX > 0) {
-          nextSlide(); // Swipe/drag left
-        } else {
-          prevSlide(); // Swipe/drag right
-        }
-      } else {
-        updateSlide(); // Snap back
-      }
+      gallerySlider.style.transition = 'transform 0.5s ease';
+      // Snap to nearest slide
+      const targetSlide = Math.round(-currentTranslate / slideWidth);
+      currentSlide = Math.max(0, Math.min(3, targetSlide));
+      updateSlide();
     }
 
     // Touch events

@@ -1,96 +1,193 @@
-// Gallery carousel ping-pong functionality
-let currentSlide = 0;
-let direction = 1; // 1 for forward, -1 for backward
-let currentTranslate = 0; // current translateX value in %
-const gallerySlider = document.querySelector('.gallery-slider');
-const galleryDots = document.querySelectorAll('.gallery-dot');
-
-function updateSlide() {
-  gallerySlider.style.transform = `translateX(${currentTranslate}%)`;
-  galleryDots.forEach((dot, index) => {
-    dot.classList.toggle('active', index === currentSlide);
-  });
-}
-
-function nextSlide() {
-  currentTranslate -= 25; // move left by one slide
-  currentSlide = Math.round(-currentTranslate / 25);
-  if (currentSlide >= 3) {
-    direction = -1;
-  } else if (currentSlide <= 0) {
-    direction = 1;
-  }
-  updateSlide();
-}
-
-function prevSlide() {
-  currentTranslate += 25; // move right by one slide
-  currentSlide = Math.round(-currentTranslate / 25);
-  if (currentSlide <= 0) {
-    direction = 1;
-  }
-  updateSlide();
-}
-
-// Dot navigation
-galleryDots.forEach((dot, index) => {
-  dot.addEventListener('click', () => {
-    gallerySlider.style.transition = 'none'; // disable transition for instant jump
-    currentTranslate = -index * 25;
-    currentSlide = index;
-    updateSlide();
-    gallerySlider.style.transition = 'transform 0.6s ease-in-out'; // re-enable transition
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   });
 });
 
-// Touch and mouse swipe/drag functionality
-let startX = 0;
-let isDragging = false;
-let prevTranslate = 0;
-const slideWidth = gallerySlider.parentElement.offsetWidth;
+// Typing effect for hero title
+const heroTitle = document.querySelector('h2');
+const originalText = heroTitle.innerHTML;
+heroTitle.innerHTML = '';
+let charIndex = 0;
 
-function startDrag(e) {
-  isDragging = true;
-  startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-  prevTranslate = currentTranslate;
-  gallerySlider.style.transition = 'none';
-  e.preventDefault();
-}
-
-function drag(e) {
-  if (!isDragging) return;
-  const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-  const deltaX = currentX - startX;
-  const deltaPercent = (deltaX / slideWidth) * 25; // 25% per slide
-  currentTranslate = prevTranslate - deltaPercent;
-  gallerySlider.style.transform = `translateX(${currentTranslate}%)`;
-}
-
-function endDrag(e) {
-  if (!isDragging) return;
-  isDragging = false;
-  gallerySlider.style.transition = 'transform 0.6s ease-in-out';
-  const endX = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
-  const deltaX = startX - endX;
-  if (Math.abs(deltaX) > 50) {
-    if (deltaX > 0) {
-      nextSlide();
-    } else if (deltaX < 0) {
-      prevSlide();
-    }
-  } else {
-    // snap back to current slide
-    currentTranslate = -currentSlide * 25;
-    updateSlide();
+function typeWriter() {
+  if (charIndex < originalText.length) {
+    heroTitle.innerHTML += originalText.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeWriter, 50);
   }
 }
 
-// Touch events
-gallerySlider.addEventListener('touchstart', startDrag);
-gallerySlider.addEventListener('touchmove', drag);
-gallerySlider.addEventListener('touchend', endDrag);
+// Start typing effect after page load
+window.addEventListener('load', () => {
+  setTimeout(typeWriter, 1000);
+});
 
-// Mouse events for desktop
-gallerySlider.addEventListener('mousedown', startDrag);
-document.addEventListener('mousemove', drag);
-document.addEventListener('mouseup', endDrag);
+// Parallax effect for hero background
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('#hero');
+  const scrolled = window.pageYOffset;
+  const rate = scrolled * -0.5;
+  if (hero) {
+    hero.style.transform = `translateY(${rate}px)`;
+  }
+});
+
+// Back to top button
+const backToTopBtn = document.createElement('button');
+backToTopBtn.innerHTML = '↑';
+backToTopBtn.className = 'fixed bottom-8 right-8 bg-gold text-dark p-3 rounded-full shadow-lg opacity-0 transition-opacity duration-300 z-50';
+backToTopBtn.style.display = 'none';
+document.body.appendChild(backToTopBtn);
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    backToTopBtn.style.display = 'block';
+    setTimeout(() => backToTopBtn.style.opacity = '1', 10);
+  } else {
+    backToTopBtn.style.opacity = '0';
+    setTimeout(() => backToTopBtn.style.display = 'none', 300);
+  }
+});
+
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// Service cards hover effects
+document.querySelectorAll('#services .border').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transform = 'translateY(-10px) scale(1.05)';
+    card.style.boxShadow = '0 20px 40px rgba(212, 175, 55, 0.3)';
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'translateY(0) scale(1)';
+    card.style.boxShadow = 'none';
+  });
+});
+
+// Testimonials carousel with JS control
+const testimonialsContainer = document.querySelector('#testimonials .overflow-hidden');
+const testimonialsWrapper = testimonialsContainer.querySelector('div');
+let testimonialsScroll = 0;
+const testimonialsSpeed = 1;
+
+function animateTestimonials() {
+  testimonialsScroll += testimonialsSpeed;
+  if (testimonialsScroll >= testimonialsWrapper.offsetWidth / 3) {
+    testimonialsScroll = 0;
+  }
+  testimonialsWrapper.style.transform = `translateX(-${testimonialsScroll}px)`;
+  requestAnimationFrame(animateTestimonials);
+}
+
+animateTestimonials();
+
+// Lazy loading for images
+const images = document.querySelectorAll('img[data-src]');
+const imageObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.classList.remove('lazy');
+      observer.unobserve(img);
+    }
+  });
+});
+
+images.forEach(img => imageObserver.observe(img));
+
+// Form validation for booking modal
+const bookingForm = document.querySelector('#bookingModal form');
+if (bookingForm) {
+  bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = bookingForm.querySelector('input[type="text"]').value.trim();
+    const phone = bookingForm.querySelector('input[type="tel"]').value.trim();
+
+    if (name === '' || phone === '') {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    if (!/^\d{10,}$/.test(phone.replace(/\D/g, ''))) {
+      alert('Please enter a valid phone number.');
+      return;
+    }
+
+    // Simulate form submission
+    alert('Thank you for your booking request! We will contact you soon.');
+    bookingForm.reset();
+    document.getElementById('bookingModal').classList.add('hidden');
+  });
+}
+
+// Dark mode toggle (optional enhancement)
+const darkModeToggle = document.createElement('button');
+darkModeToggle.innerHTML = '🌙';
+darkModeToggle.className = 'fixed top-8 right-8 bg-dark text-gold p-3 rounded-full shadow-lg z-50';
+document.body.appendChild(darkModeToggle);
+
+let isDarkMode = true;
+darkModeToggle.addEventListener('click', () => {
+  isDarkMode = !isDarkMode;
+  document.body.classList.toggle('bg-dark', isDarkMode);
+  document.body.classList.toggle('text-white', isDarkMode);
+  document.body.classList.toggle('bg-white', !isDarkMode);
+  document.body.classList.toggle('text-dark', !isDarkMode);
+  darkModeToggle.innerHTML = isDarkMode ? '🌙' : '☀️';
+});
+
+// Mobile menu improvements
+const menuBtn = document.querySelector("header button");
+const nav = document.querySelector("header nav");
+let menuOpen = false;
+
+menuBtn.addEventListener("click", () => {
+  menuOpen = !menuOpen;
+  nav.classList.toggle("hidden");
+  menuBtn.innerHTML = menuOpen ? "✕" : "Menu";
+});
+
+// Scroll progress indicator
+const progressBar = document.createElement('div');
+progressBar.className = 'fixed top-0 left-0 h-1 bg-gold z-50';
+progressBar.style.width = '0%';
+document.body.appendChild(progressBar);
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.body.offsetHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  progressBar.style.width = `${scrollPercent}%`;
+});
+
+// Enhanced animations with GSAP-like effects (using CSS transitions)
+document.querySelectorAll('[data-animate]').forEach(el => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.delay || 0;
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0) scale(1)';
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  observer.observe(el);
+});

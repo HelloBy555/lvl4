@@ -27,8 +27,7 @@ function prevSlide() {
   updateSlide();
 }
 
-// Auto-advance every 3 seconds (optional, remove if not needed)
-setInterval(nextSlide, 3000);
+
 
 // Dot navigation
 galleryDots.forEach((dot, index) => {

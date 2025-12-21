@@ -1,46 +1,51 @@
 // Gallery carousel ping-pong functionality
 let currentSlide = 0;
 let direction = 1; // 1 for forward, -1 for backward
+let currentTranslate = 0; // current translateX value in %
 const gallerySlider = document.querySelector('.gallery-slider');
 const galleryDots = document.querySelectorAll('.gallery-dot');
 
 function updateSlide() {
-  gallerySlider.style.transform = `translateX(-${currentSlide * 25}%)`;
+  gallerySlider.style.transform = `translateX(${currentTranslate}%)`;
   galleryDots.forEach((dot, index) => {
     dot.classList.toggle('active', index === currentSlide);
   });
 }
 
 function nextSlide() {
-  if (currentSlide === 3 && direction === 1) {
+  currentTranslate -= 25; // move left by one slide
+  currentSlide = Math.round(-currentTranslate / 25);
+  if (currentSlide >= 3) {
     direction = -1;
-  } else if (currentSlide === 0 && direction === -1) {
+  } else if (currentSlide <= 0) {
     direction = 1;
   }
-  currentSlide += direction;
   updateSlide();
 }
 
 function prevSlide() {
-  currentSlide = Math.max(0, currentSlide - 1);
-  if (currentSlide === 0) direction = 1;
+  currentTranslate += 25; // move right by one slide
+  currentSlide = Math.round(-currentTranslate / 25);
+  if (currentSlide <= 0) {
+    direction = 1;
+  }
   updateSlide();
 }
-
-
 
 // Dot navigation
 galleryDots.forEach((dot, index) => {
   dot.addEventListener('click', () => {
+    gallerySlider.style.transition = 'none'; // disable transition for instant jump
+    currentTranslate = -index * 25;
     currentSlide = index;
     updateSlide();
+    gallerySlider.style.transition = 'transform 0.6s ease-in-out'; // re-enable transition
   });
 });
 
 // Touch and mouse swipe/drag functionality
 let startX = 0;
 let isDragging = false;
-let currentTranslate = 0; // in %
 let prevTranslate = 0;
 const slideWidth = gallerySlider.parentElement.offsetWidth;
 
@@ -57,7 +62,7 @@ function drag(e) {
   const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
   const deltaX = currentX - startX;
   const deltaPercent = (deltaX / slideWidth) * 25; // 25% per slide
-  currentTranslate = prevTranslate - deltaPercent; // negative for left swipe
+  currentTranslate = prevTranslate - deltaPercent;
   gallerySlider.style.transform = `translateX(${currentTranslate}%)`;
 }
 
@@ -74,6 +79,8 @@ function endDrag(e) {
       prevSlide();
     }
   } else {
+    // snap back to current slide
+    currentTranslate = -currentSlide * 25;
     updateSlide();
   }
 }

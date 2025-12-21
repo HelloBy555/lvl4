@@ -12,6 +12,59 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+
+let index = 0;
+let startX = 0;
+let currentX = 0;
+let isDragging = false;
+const slideWidth = slider.parentElement.offsetWidth;
+
+slider.addEventListener('pointerdown', e => {
+  isDragging = true;
+  startX = e.clientX;
+  slider.style.transition = 'none';
+});
+
+window.addEventListener('pointermove', e => {
+  if (!isDragging) return;
+  currentX = e.clientX - startX;
+  slider.style.transform = `translateX(${-index * slideWidth + currentX}px)`;
+});
+
+window.addEventListener('pointerup', () => {
+  if (!isDragging) return;
+  isDragging = false;
+  slider.style.transition = 'transform 0.5s ease';
+
+  if (Math.abs(currentX) > slideWidth / 4) {
+    if (currentX < 0 && index < slides.length - 1) index++;
+    if (currentX > 0 && index > 0) index--;
+  }
+
+  slider.style.transform = `translateX(${-index * slideWidth}px)`;
+  currentX = 0;
+});
+
+// Gallery carousel button controls
+const leftBtn = document.querySelector('.nav.left');
+const rightBtn = document.querySelector('.nav.right');
+
+leftBtn.addEventListener('click', () => {
+  if (index > 0) {
+    index--;
+    slider.style.transform = `translateX(${-index * slideWidth}px)`;
+  }
+});
+
+rightBtn.addEventListener('click', () => {
+  if (index < slides.length - 1) {
+    index++;
+    slider.style.transform = `translateX(${-index * slideWidth}px)`;
+  }
+});
+
 // Typing effect for hero title
 const heroTitle = document.querySelector('h2');
 const originalText = heroTitle.innerHTML;

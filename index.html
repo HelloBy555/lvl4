@@ -102,6 +102,7 @@
       display: flex;
       width: 400%;
       height: 100%;
+      transition: transform 0.6s ease-in-out;
     }
 
     .gallery-slide {
@@ -375,98 +376,6 @@
     </div>
   </div>
 
-  <script>
-    // Simple fade-in animation on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Gallery carousel functionality
-    let currentSlide = 0;
-    const gallerySlider = document.querySelector('.gallery-slider');
-    const galleryDots = document.querySelectorAll('.gallery-dot');
-
-    function updateSlide() {
-      gallerySlider.style.transform = `translateX(-${currentSlide * 25}%)`;
-      galleryDots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-      });
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % 4;
-      updateSlide();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + 4) % 4;
-      updateSlide();
-    }
-
-    // Touch and mouse swipe/drag functionality
-    let startX = 0;
-    let isDragging = false;
-    let currentTranslate = 0; // in %
-    let prevTranslate = 0;
-    const slideWidth = gallerySlider.parentElement.offsetWidth;
-
-    function startDrag(e) {
-      isDragging = true;
-      startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-      prevTranslate = currentTranslate;
-      gallerySlider.style.transition = 'none';
-      e.preventDefault();
-    }
-
-    function drag(e) {
-      if (!isDragging) return;
-      const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-      const deltaX = currentX - startX;
-      const deltaPercent = (deltaX / slideWidth) * 25; // 25% per slide
-      currentTranslate = prevTranslate - deltaPercent; // negative for left swipe
-      gallerySlider.style.transform = `translateX(${currentTranslate}%)`;
-    }
-
-    function endDrag(e) {
-      if (!isDragging) return;
-      isDragging = false;
-      gallerySlider.style.transition = 'transform 0.5s ease';
-      const endX = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
-      const deltaX = startX - endX;
-      if (Math.abs(deltaX) > 50) {
-        if (deltaX > 0) {
-          nextSlide();
-        } else if (deltaX < 0) {
-          prevSlide();
-        }
-      } else {
-        updateSlide();
-      }
-    }
-
-    // Touch events
-    gallerySlider.addEventListener('touchstart', startDrag);
-    gallerySlider.addEventListener('touchmove', drag);
-    gallerySlider.addEventListener('touchend', endDrag);
-
-    // Mouse events for desktop
-    gallerySlider.addEventListener('mousedown', startDrag);
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', endDrag);
-
-    // Dot navigation
-    galleryDots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        currentSlide = index;
-        updateSlide();
-      });
-    });
-  </script>
+  <script src="index.js"></script>
 </body>
 </html>

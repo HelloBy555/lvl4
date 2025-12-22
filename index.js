@@ -12,42 +12,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// Remove light/dark mode toggle
+// The light/dark mode toggle button and its event listener have been removed as per the task
+
+// Gallery carousel button controls only
 const slider = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
-
 let index = 0;
-let startX = 0;
-let currentX = 0;
-let isDragging = false;
 const slideWidth = slider.parentElement.offsetWidth;
 
-slider.addEventListener('pointerdown', e => {
-  isDragging = true;
-  startX = e.clientX;
-  slider.style.transition = 'none';
-});
-
-window.addEventListener('pointermove', e => {
-  if (!isDragging) return;
-  currentX = e.clientX - startX;
-  slider.style.transform = `translateX(${-index * slideWidth + currentX}px)`;
-});
-
-window.addEventListener('pointerup', () => {
-  if (!isDragging) return;
-  isDragging = false;
-  slider.style.transition = 'transform 0.5s ease';
-
-  if (Math.abs(currentX) > slideWidth / 4) {
-    if (currentX < 0 && index < slides.length - 1) index++;
-    if (currentX > 0 && index > 0) index--;
-  }
-
-  slider.style.transform = `translateX(${-index * slideWidth}px)`;
-  currentX = 0;
-});
-
-// Gallery carousel button controls
 const leftBtn = document.querySelector('.nav.left');
 const rightBtn = document.querySelector('.nav.right');
 
@@ -65,24 +38,24 @@ rightBtn.addEventListener('click', () => {
   }
 });
 
-// Typing effect for hero title
-const heroTitle = document.querySelector('h2');
-const originalText = heroTitle.innerHTML;
-heroTitle.innerHTML = '';
-let charIndex = 0;
+// Typing effect for hero title - disabled due to HTML content
+// const heroTitle = document.querySelector('h2');
+// const originalText = heroTitle.innerHTML;
+// heroTitle.innerHTML = '';
+// let charIndex = 0;
 
-function typeWriter() {
-  if (charIndex < originalText.length) {
-    heroTitle.innerHTML += originalText.charAt(charIndex);
-    charIndex++;
-    setTimeout(typeWriter, 50);
-  }
-}
+// function typeWriter() {
+//   if (charIndex < originalText.length) {
+//     heroTitle.innerHTML += originalText.charAt(charIndex);
+//     charIndex++;
+//     setTimeout(typeWriter, 50);
+//   }
+// }
 
 // Start typing effect after page load
-window.addEventListener('load', () => {
-  setTimeout(typeWriter, 1000);
-});
+// window.addEventListener('load', () => {
+//   setTimeout(typeWriter, 1000);
+// });
 
 // Parallax effect for hero background
 window.addEventListener('scroll', () => {
@@ -188,21 +161,7 @@ if (bookingForm) {
   });
 }
 
-// Dark mode toggle (optional enhancement)
-const darkModeToggle = document.createElement('button');
-darkModeToggle.innerHTML = '🌙';
-darkModeToggle.className = 'fixed top-8 right-8 bg-dark text-gold p-3 rounded-full shadow-lg z-50';
-document.body.appendChild(darkModeToggle);
 
-let isDarkMode = true;
-darkModeToggle.addEventListener('click', () => {
-  isDarkMode = !isDarkMode;
-  document.body.classList.toggle('bg-dark', isDarkMode);
-  document.body.classList.toggle('text-white', isDarkMode);
-  document.body.classList.toggle('bg-white', !isDarkMode);
-  document.body.classList.toggle('text-dark', !isDarkMode);
-  darkModeToggle.innerHTML = isDarkMode ? '🌙' : '☀️';
-});
 
 // Mobile menu improvements
 const menuBtn = document.querySelector("header button");
@@ -244,3 +203,6 @@ document.querySelectorAll('[data-animate]').forEach(el => {
   }, { threshold: 0.1 });
   observer.observe(el);
 });
+
+// Remove redundant fade-in observer from HTML script
+// The IntersectionObserver in HTML is redundant with this one, so we keep this one for consistency

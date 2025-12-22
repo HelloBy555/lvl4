@@ -163,15 +163,24 @@ if (bookingForm) {
 
 
 
-// Mobile menu improvements
-const menuBtn = document.querySelector("header button");
-const nav = document.querySelector("header nav");
+// Fullscreen/Side Menu Toggle
+const menuBtn = document.querySelector(".menu-btn");
+const menuOverlay = document.getElementById("menu-overlay");
 let menuOpen = false;
 
 menuBtn.addEventListener("click", () => {
   menuOpen = !menuOpen;
-  nav.classList.toggle("hidden");
+  menuOverlay.classList.toggle("hidden");
   menuBtn.innerHTML = menuOpen ? "✕" : "Menu";
+});
+
+// Close menu on link click
+document.querySelectorAll(".menu-link").forEach(link => {
+  link.addEventListener("click", () => {
+    menuOpen = false;
+    menuOverlay.classList.add("hidden");
+    menuBtn.innerHTML = "Menu";
+  });
 });
 
 // Scroll progress indicator

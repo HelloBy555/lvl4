@@ -53,7 +53,7 @@
     .hero-img:hover { transform: scale(1.05); }
 
   header {
-      position: sticky;
+      position: fixed;
       top: 0;
       z-index: 50;
       background: black;
@@ -182,16 +182,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Mobile menu toggle with improved UX
-      const menuBtn = document.querySelector("header button");
-      const nav = document.querySelector("header nav");
-      let menuOpen = false;
-      menuBtn.addEventListener("click", () => {
-        menuOpen = !menuOpen;
-        nav.classList.toggle("hidden");
-        menuBtn.innerHTML = menuOpen ? "✕" : "Menu";
-      });
-
       // Booking modal with WhatsApp redirect
       const modal = document.getElementById('bookingModal');
       document.querySelectorAll('.open-modal').forEach(btn => {
@@ -228,24 +218,22 @@
 <body class="bg-dark text-white font-sek">
 
   <!-- NAVBAR -->
-  <header class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black">
+  <header class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black w-full">
     <div class="logo-container"></div>
     <a href="#hero"><h1 class="text-2xl font-bold text-gold tracking-wide">SAAD BARBERSHOP</h1></a>
-    <nav class="hidden md:flex gap-8 text-sm">
-      <div class="dropdown">
-        <a href="#services" class="hover:text-gold transition-colors duration-300">Services</a>
-        <div class="dropdown-content">
-          <a href="#services">Coupe de cheveux</a>
-          <a href="#services">Toilettage de barbe</a>
-          <a href="#services">Rasage classique</a>
-        </div>
-      </div>
-      <a href="#gallery" class="hover:text-gold transition-colors duration-300">Galerie</a>
-      <a href="#visit-us" class="hover:text-gold transition-colors duration-300">Nous Visiter</a>
-      <a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a>
-    </nav>
-    <button class="md:hidden text-sm">Menu</button>
+    <button class="text-sm menu-btn">Menu</button>
   </header>
+
+  <!-- FULLSCREEN/SIDE MENU -->
+  <div id="menu-overlay" class="fixed inset-0 bg-black z-40 hidden md:hidden md:flex md:flex-col md:w-80 md:right-0 md:top-0 md:bottom-0 md:bg-black md:z-40">
+    <div class="flex flex-col items-center justify-center h-full space-y-8 text-white text-2xl font-bold">
+      <a href="#hero" class="menu-link hover:text-gold transition-colors">Home</a>
+      <a href="#services" class="menu-link hover:text-gold transition-colors">Services</a>
+      <a href="#gallery" class="menu-link hover:text-gold transition-colors">Gallery</a>
+      <a href="#visit-us" class="menu-link hover:text-gold transition-colors">Visit Us</a>
+      <a href="#contact" class="menu-link hover:text-gold transition-colors">Contact</a>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section id="hero" class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/hero-background.webp');">

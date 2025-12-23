@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saad Barbershop</title>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./pictures/logo.png">
+
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Amarna:wght@400;700&display=swap" rel="stylesheet">
 
@@ -218,22 +221,51 @@
 <body class="bg-dark text-white font-sek">
 
   <!-- NAVBAR -->
-  <header class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black w-full">
-    <div class="logo-container"></div>
-    <a href="#hero"><h1 class="text-2xl font-bold text-gold tracking-wide">SAAD BARBERSHOP</h1></a>
-    <button class="text-sm menu-btn">Menu</button>
+  <header class="fixed top-0 left-0 w-full z-50 bg-black border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <!-- LEFT: LOGO PLACEHOLDER -->
+      <div class="flex items-center gap-4">
+        <!-- Logo container -->
+        <img src="./pictures/logo.png" alt="Logo" class="w-10 h-10 rounded">
+
+        <!-- Brand -->
+        <button
+          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          class="text-white font-bold tracking-wide text-lg"
+        >
+          SAAD BARBERSHOP
+        </button>
+      </div>
+
+      <!-- RIGHT: MENU BUTTON -->
+      <button
+        id="menuBtn"
+        class="text-white text-sm uppercase tracking-widest"
+      >
+        Menu
+      </button>
+    </div>
   </header>
 
-  <!-- FULLSCREEN/SIDE MENU -->
-  <div id="menu-overlay" class="fixed inset-0 bg-black z-40 hidden md:hidden md:flex md:flex-col md:w-80 md:right-0 md:top-0 md:bottom-0 md:bg-black md:z-40">
-    <div class="flex flex-col items-center justify-center h-full space-y-8 text-white text-2xl font-bold">
-      <a href="#hero" class="menu-link hover:text-gold transition-colors">Home</a>
-      <a href="#services" class="menu-link hover:text-gold transition-colors">Services</a>
-      <a href="#gallery" class="menu-link hover:text-gold transition-colors">Gallery</a>
-      <a href="#visit-us" class="menu-link hover:text-gold transition-colors">Visit Us</a>
-      <a href="#contact" class="menu-link hover:text-gold transition-colors">Contact</a>
-    </div>
+  <!-- FULLSCREEN / SIDE MENU -->
+  <div
+    id="overlayMenu"
+    class="fixed inset-0 bg-black text-white z-40 transform translate-x-full transition-transform duration-300 ease-in-out"
+  >
+    <nav class="h-full flex flex-col justify-center items-center gap-10 text-2xl font-semibold">
+
+      <button class="menu-link" data-target="hero">Home</button>
+      <button class="menu-link" data-target="services">Services</button>
+      <button class="menu-link" data-target="gallery">Gallery</button>
+      <button class="menu-link" data-target="visit-us">Visit Us</button>
+      <button class="menu-link" data-target="contact">Contact</button>
+
+    </nav>
   </div>
+
+  <!-- Spacer so content doesn't hide behind fixed navbar -->
+  <div class="h-20"></div>
 
   <!-- HERO -->
   <section id="hero" class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/hero-background.webp');">

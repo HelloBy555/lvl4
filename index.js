@@ -57,15 +57,7 @@ rightBtn.addEventListener('click', () => {
 //   setTimeout(typeWriter, 1000);
 // });
 
-// Parallax effect for hero background
-window.addEventListener('scroll', () => {
-  const hero = document.querySelector('#hero');
-  const scrolled = window.pageYOffset;
-  const rate = scrolled * -0.5;
-  if (hero) {
-    hero.style.transform = `translateY(${rate}px)`;
-  }
-});
+
 
 // Back to top button
 const backToTopBtn = document.createElement('button');
@@ -163,23 +155,33 @@ if (bookingForm) {
 
 
 
-// Fullscreen/Side Menu Toggle
-const menuBtn = document.querySelector(".menu-btn");
-const menuOverlay = document.getElementById("menu-overlay");
+// FULLSCREEN / SIDE MENU LOGIC
+const menuBtn = document.getElementById("menuBtn");
+const overlayMenu = document.getElementById("overlayMenu");
+const menuLinks = document.querySelectorAll(".menu-link");
+
 let menuOpen = false;
 
 menuBtn.addEventListener("click", () => {
   menuOpen = !menuOpen;
-  menuOverlay.classList.toggle("hidden");
-  menuBtn.innerHTML = menuOpen ? "✕" : "Menu";
+
+  overlayMenu.classList.toggle("translate-x-full", !menuOpen);
+  menuBtn.textContent = menuOpen ? "✕" : "Menu";
 });
 
-// Close menu on link click
-document.querySelectorAll(".menu-link").forEach(link => {
+// Close menu + scroll
+menuLinks.forEach(link => {
   link.addEventListener("click", () => {
+    const targetId = link.dataset.target;
+    const target = document.getElementById(targetId);
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+
+    overlayMenu.classList.add("translate-x-full");
+    menuBtn.textContent = "Menu";
     menuOpen = false;
-    menuOverlay.classList.add("hidden");
-    menuBtn.innerHTML = "Menu";
   });
 });
 

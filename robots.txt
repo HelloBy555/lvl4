@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /pictures/
+Disallow: /admin/
+Disallow: /*.js
+Disallow: /*.css
+
+Sitemap: https://saad-barbershop.com/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 1

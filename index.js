@@ -12,57 +12,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Remove light/dark mode toggle
-// The light/dark mode toggle button and its event listener have been removed as per the task
-
-// Gallery carousel button controls only
+// Gallery carousel with improved responsiveness
 const slider = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
 let index = 0;
-const slideWidth = slider.parentElement.offsetWidth;
+
+function updateSliderPosition() {
+  const slideWidth = slider.parentElement.offsetWidth;
+  slider.style.transform = `translateX(${-index * slideWidth}px)`;
+}
 
 const leftBtn = document.querySelector('.nav.left');
 const rightBtn = document.querySelector('.nav.right');
 
-leftBtn.addEventListener('click', () => {
-  if (index > 0) {
-    index--;
-    slider.style.transform = `translateX(${-index * slideWidth}px)`;
-  }
-});
+if (leftBtn && rightBtn) {
+  leftBtn.addEventListener('click', () => {
+    if (index > 0) {
+      index--;
+      updateSliderPosition();
+    }
+  });
 
-rightBtn.addEventListener('click', () => {
-  if (index < slides.length - 1) {
-    index++;
-    slider.style.transform = `translateX(${-index * slideWidth}px)`;
-  }
-});
+  rightBtn.addEventListener('click', () => {
+    if (index < slides.length - 1) {
+      index++;
+      updateSliderPosition();
+    }
+  });
 
-// Typing effect for hero title - disabled due to HTML content
-// const heroTitle = document.querySelector('h2');
-// const originalText = heroTitle.innerHTML;
-// heroTitle.innerHTML = '';
-// let charIndex = 0;
+  // Handle window resize
+  window.addEventListener('resize', updateSliderPosition);
+}
 
-// function typeWriter() {
-//   if (charIndex < originalText.length) {
-//     heroTitle.innerHTML += originalText.charAt(charIndex);
-//     charIndex++;
-//     setTimeout(typeWriter, 50);
-//   }
-// }
-
-// Start typing effect after page load
-// window.addEventListener('load', () => {
-//   setTimeout(typeWriter, 1000);
-// });
-
-
-
-// Back to top button
+// Back to top button with enhanced styling
 const backToTopBtn = document.createElement('button');
 backToTopBtn.innerHTML = '↑';
-backToTopBtn.className = 'fixed bottom-8 right-8 bg-gold text-dark p-3 rounded-full shadow-lg opacity-0 transition-opacity duration-300 z-50';
+backToTopBtn.className = 'fixed bottom-8 right-8 bg-gold text-dark p-3 rounded-full shadow-xl opacity-0 transition-all duration-300 z-50 hover:scale-110 font-bold';
 backToTopBtn.style.display = 'none';
 document.body.appendChild(backToTopBtn);
 
@@ -83,119 +68,147 @@ backToTopBtn.addEventListener('click', () => {
   });
 });
 
-// Service cards hover effects
+// Service cards enhanced hover effects
 document.querySelectorAll('#services .border').forEach(card => {
   card.addEventListener('mouseenter', () => {
-    card.style.transform = 'translateY(-10px) scale(1.05)';
-    card.style.boxShadow = '0 20px 40px rgba(212, 175, 55, 0.3)';
+    card.style.transform = 'translateY(-10px)';
+    card.style.boxShadow = '0 25px 50px rgba(212, 175, 55, 0.25)';
   });
 
   card.addEventListener('mouseleave', () => {
-    card.style.transform = 'translateY(0) scale(1)';
+    card.style.transform = 'translateY(0)';
     card.style.boxShadow = 'none';
   });
 });
 
-// Testimonials carousel with JS control
-const testimonialsContainer = document.querySelector('#testimonials .overflow-hidden');
-const testimonialsWrapper = testimonialsContainer.querySelector('div');
-let testimonialsScroll = 0;
-const testimonialsSpeed = 1;
-
-function animateTestimonials() {
-  testimonialsScroll += testimonialsSpeed;
-  if (testimonialsScroll >= testimonialsWrapper.offsetWidth / 3) {
-    testimonialsScroll = 0;
-  }
-  testimonialsWrapper.style.transform = `translateX(-${testimonialsScroll}px)`;
-  requestAnimationFrame(animateTestimonials);
-}
-
-animateTestimonials();
-
-// Lazy loading for images
-const images = document.querySelectorAll('img[data-src]');
-const imageObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const img = entry.target;
-      img.src = img.dataset.src;
-      img.classList.remove('lazy');
-      observer.unobserve(img);
-    }
-  });
-});
-
-images.forEach(img => imageObserver.observe(img));
-
-// Form validation for booking modal
-const bookingForm = document.querySelector('#bookingModal form');
-if (bookingForm) {
-  bookingForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = bookingForm.querySelector('input[type="text"]').value.trim();
-    const phone = bookingForm.querySelector('input[type="tel"]').value.trim();
-
-    if (name === '' || phone === '') {
-      alert('Please fill in all fields.');
-      return;
-    }
-
-    if (!/^\d{10,}$/.test(phone.replace(/\D/g, ''))) {
-      alert('Please enter a valid phone number.');
-      return;
-    }
-
-    // Simulate form submission
-    alert('Thank you for your booking request! We will contact you soon.');
-    bookingForm.reset();
-    document.getElementById('bookingModal').classList.add('hidden');
-  });
-}
-
-
-
-// FULLSCREEN / SIDE MENU LOGIC
+// FULLSCREEN / SIDE MENU LOGIC with improved animations and accessibility
 const menuBtn = document.getElementById("menuBtn");
 const overlayMenu = document.getElementById("overlayMenu");
 const menuLinks = document.querySelectorAll(".menu-link");
 
 let menuOpen = false;
 
-menuBtn.addEventListener("click", () => {
-  menuOpen = !menuOpen;
-
-  overlayMenu.classList.toggle("translate-x-full", !menuOpen);
-  menuBtn.textContent = menuOpen ? "✕" : "Menu";
-});
-
-// Close menu + scroll
-menuLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    const targetId = link.dataset.target;
-    const target = document.getElementById(targetId);
-
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-
-    overlayMenu.classList.add("translate-x-full");
-    menuBtn.textContent = "Menu";
-    menuOpen = false;
+if (menuBtn && overlayMenu) {
+  menuBtn.addEventListener("click", () => {
+    menuOpen = !menuOpen;
+    overlayMenu.classList.toggle("translate-x-full", !menuOpen);
+    menuBtn.textContent = menuOpen ? "✕" : "Menu";
+    menuBtn.setAttribute("aria-expanded", menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
   });
-});
+
+  // Close menu when clicking on a link
+  menuLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const targetId = link.dataset.target;
+      const target = document.getElementById(targetId);
+
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+
+      overlayMenu.classList.add("translate-x-full");
+      menuBtn.textContent = "Menu";
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuOpen = false;
+      document.body.style.overflow = 'auto';
+    });
+  });
+
+  // Close menu when clicking outside
+  overlayMenu.addEventListener('click', (e) => {
+    if (e.target === overlayMenu) {
+      overlayMenu.classList.add("translate-x-full");
+      menuBtn.textContent = "Menu";
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuOpen = false;
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuOpen) {
+      overlayMenu.classList.add("translate-x-full");
+      menuBtn.textContent = "Menu";
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuOpen = false;
+      document.body.style.overflow = 'auto';
+    }
+  });
+}
 
 // Scroll progress indicator
 const progressBar = document.createElement('div');
 progressBar.className = 'fixed top-0 left-0 h-1 bg-gold z-50';
 progressBar.style.width = '0%';
+progressBar.style.transition = 'width 0.1s ease';
 document.body.appendChild(progressBar);
 
 window.addEventListener('scroll', () => {
   const scrollTop = window.pageYOffset;
-  const docHeight = document.body.offsetHeight - window.innerHeight;
-  const scrollPercent = (scrollTop / docHeight) * 100;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
   progressBar.style.width = `${scrollPercent}%`;
+});
+
+// Booking modal enhanced with better UX
+const modal = document.getElementById('bookingModal');
+const openModalBtns = document.querySelectorAll('.open-modal');
+
+if (modal && openModalBtns.length > 0) {
+  openModalBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  const bookingForm = modal.querySelector('form');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = bookingForm.querySelector('input[type="text"]').value.trim();
+      const phone = bookingForm.querySelector('input[type="tel"]').value.trim();
+
+      if (name && phone) {
+        const message = `Bonjour, je m'appelle ${name}. Je souhaite réserver un rendez-vous.`;
+        const whatsappUrl = `https://wa.me/212XXXXXXXXX?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        modal.classList.add('hidden');
+        bookingForm.reset();
+        document.body.style.overflow = 'auto';
+      } else {
+        alert('Veuillez remplir tous les champs.');
+      }
+    });
+  }
+}
+
+// Animate elements on scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('[data-animate]').forEach(element => {
+  observer.observe(element);
 });
 
 // Enhanced animations with GSAP-like effects (using CSS transitions)

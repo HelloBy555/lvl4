@@ -3,10 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saad Barbershop</title>
+  
+  <!-- SEO Meta Tags -->
+<title>Zacky Barber - Coiffeur Barbier Professionnel à Marrakech</title>
+<meta name="description" content="Zacky Barber - Barbier professionnel à Marrakech. Coupe de cheveux précise, toilettage de barbe, rasage classique. Rendez-vous en ligne via WhatsApp.">
+  <meta name="keywords" content="barbershop, coiffeur barbier, coupe cheveux, barbe, rasage, Marrakech, barbier Maroc">
+  <meta name="author" content="Saad Barbershop">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="French">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Saad Barbershop - Coiffeur Barbier Professionnel">
+  <meta property="og:description" content="Découvrez nos services de barbering de qualité. Coupe, barbe, rasage classique.">
+  <meta property="og:type" content="business.business">
+  <meta property="og:url" content="https://saad-barbershop.com">
+  <meta property="og:image" content="./pictures/logo.png">
+  <meta property="og:locale" content="fr_FR">
+  
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Saad Barbershop">
+  <meta name="twitter:description" content="Barbershop professionnel à Marrakech">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://saad-barbershop.com/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./pictures/logo.png">
+  <link rel="apple-touch-icon" href="./pictures/logo.png">
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Amarna:wght@400;700&display=swap" rel="stylesheet">
@@ -29,6 +53,49 @@
         }
       }
     }
+  </script>
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Zacky Barber",
+    "image": "./pictures/logo.png",
+    "description": "Barbershop professionnel offrant des services de coupe, barbe et rasage classique",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Rue de la Kasbah",
+      "addressLocality": "Marrakech",
+      "addressCountry": "MA"
+    },
+"https://zackybarber.com",
+    "sameAs": [
+      "https://www.instagram.com/zackybarber",
+      "https://www.facebook.com/zackybarber",
+      "https://wa.me/212XXXXXXXXX"
+    ],
+    "priceRange": "$$",
+    "openingHours": "Mo-Su 09:00-20:00",
+    "areaServed": "MA",
+    "service": [
+      {
+        "@type": "Service",
+        "name": "Coupe de cheveux précise",
+        "description": "Coupe de cheveux nette et stylée adaptée à votre visage"
+      },
+      {
+        "@type": "Service",
+        "name": "Toilettage de barbe",
+        "description": "Taille, forme et conditionnement professionnel de barbe"
+      },
+      {
+        "@type": "Service",
+        "name": "Rasage classique",
+        "description": "Rasage traditionnel à la serviette chaude"
+      }
+    ]
+  }
   </script>
 
   <style>
@@ -55,50 +122,19 @@
     .hero-img { transition: transform 0.5s ease; }
     .hero-img:hover { transform: scale(1.05); }
 
-  header {
+    header {
       position: fixed;
       top: 0;
       z-index: 50;
-      background: black;
-    }
-
-    /* Dropdown menu styles */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      font-size: 14px;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
+      background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+      backdrop-filter: blur(10px);
     }
 
     .logo-container {
       width: 40px;
       height: 40px;
-      background-color: #d4af37; /* Gold placeholder */
-      border-radius: 4px;
+      background-color: #d4af37;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -120,20 +156,33 @@
       overflow: hidden;
       white-space: nowrap;
       background-color: #000;
-      padding: 2rem 0;
+      padding: 3rem 0;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
     .text-belt {
       display: inline-block;
-      animation: textBelt 15s linear infinite;
-      font-size: 2rem;
+      animation: textBelt 20s linear infinite;
+      font-size: 1.8rem;
       color: #d4af37;
       font-weight: bold;
       font-family: 'Amarna', sans-serif;
-      letter-spacing: 1rem;
+      letter-spacing: 0.8rem;
+      text-transform: uppercase;
     }
 
     /* Section spacing */
-    section { padding-top: 6rem; padding-bottom: 6rem; }
+    section { 
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    
+    @media (min-width: 768px) {
+      section { 
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+      }
+    }
 
     /* Gallery carousel styles */
     .gallery {
@@ -143,8 +192,9 @@
       aspect-ratio: 16 / 9;
       margin: auto;
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: 20px;
       background: #000;
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15);
     }
 
     .slider {
@@ -156,7 +206,7 @@
     .slide {
       min-width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       user-select: none;
     }
 
@@ -165,21 +215,24 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
-      border: none;
-      color: white;
-      font-size: 28px;
-      padding: 12px 16px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 2px solid rgba(212, 175, 55, 0.4);
+      color: #d4af37;
+      font-size: 24px;
+      padding: 12px 14px;
       cursor: pointer;
       border-radius: 50%;
       z-index: 10;
+      transition: all 0.3s ease;
     }
 
-    .nav.left { left: 15px; }
-    .nav.right { right: 15px; }
+    .nav.left { left: 20px; }
+    .nav.right { right: 20px; }
 
     .nav:hover {
-      background: rgba(0,0,0,0.85);
+      background: rgba(212, 175, 55, 0.25);
+      border-color: #d4af37;
+      transform: translateY(-50%) scale(1.1);
     }
   </style>
 
@@ -221,27 +274,29 @@
 <body class="bg-dark text-white font-sek">
 
   <!-- NAVBAR -->
-  <header class="fixed top-0 left-0 w-full z-50 bg-black border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <header class="fixed top-0 left-0 w-full z-50 bg-black border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
 
       <!-- LEFT: LOGO PLACEHOLDER -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 sm:gap-3">
         <!-- Logo container -->
-        <img src="./pictures/logo.png" alt="Logo" class="w-10 h-10 rounded">
+        <img src="./pictures/logo.png" alt="Zacky Barber Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg shadow-lg">
 
         <!-- Brand -->
         <button
           onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-          class="text-white font-bold tracking-wide text-lg"
+          class="text-white font-bold tracking-widest text-xs sm:text-sm md:text-lg hover:text-gold transition-colors duration-300 hidden sm:block"
         >
-          SAAD BARBERSHOP
+          ZACKY BARBER
         </button>
       </div>
 
       <!-- RIGHT: MENU BUTTON -->
       <button
         id="menuBtn"
-        class="text-white text-sm uppercase tracking-widest"
+        class="text-white text-xs sm:text-sm uppercase tracking-widest hover:text-gold transition-colors duration-300 px-2 sm:px-3 py-1.5 sm:py-2 border border-white/20 rounded-lg text-center font-medium"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
       >
         Menu
       </button>
@@ -251,15 +306,15 @@
   <!-- FULLSCREEN / SIDE MENU -->
   <div
     id="overlayMenu"
-    class="fixed inset-0 bg-black text-white z-40 transform translate-x-full transition-transform duration-300 ease-in-out"
+    class="fixed inset-0 bg-black/95 text-white z-40 transform translate-x-full transition-transform duration-300 ease-in-out backdrop-blur-sm"
   >
-    <nav class="h-full flex flex-col justify-center items-center gap-10 text-2xl font-semibold">
+    <nav class="h-full flex flex-col justify-center items-center gap-12 text-2xl sm:text-3xl font-semibold">
 
-      <button class="menu-link" data-target="hero">Home</button>
-      <button class="menu-link" data-target="services">Services</button>
-      <button class="menu-link" data-target="gallery">Gallery</button>
-      <button class="menu-link" data-target="visit-us">Visit Us</button>
-      <button class="menu-link" data-target="contact">Contact</button>
+      <button class="menu-link hover:text-gold transition-colors duration-300" data-target="hero">Home</button>
+      <button class="menu-link hover:text-gold transition-colors duration-300" data-target="services">Services</button>
+      <button class="menu-link hover:text-gold transition-colors duration-300" data-target="gallery">Gallery</button>
+      <button class="menu-link hover:text-gold transition-colors duration-300" data-target="visit-us">Visit Us</button>
+      <button class="menu-link hover:text-gold transition-colors duration-300" data-target="contact">Contact</button>
 
     </nav>
   </div>
@@ -268,22 +323,22 @@
   <div class="h-20"></div>
 
   <!-- HERO -->
-  <section id="hero" class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/hero-background.webp');">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-black/60 p-8 rounded-xl">
+  <section id="hero" class="px-4 sm:px-6 py-20 sm:py-32 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/hero-background.webp');">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center bg-black/70 p-6 sm:p-10 rounded-2xl backdrop-blur-sm">
       <div>
-        <h2 class="text-5xl md:text-6xl font-extrabold mb-6" data-animate="fade-slide-up" data-delay="0">
-          Bienvenue chez Saad<br><span class="text-gold">Barbershop</span>
-        </h2>
-        <p class="text-gray-400 max-w-md mb-8" data-animate="fade-slide-up" data-delay="150">
-          Où le style rencontre la précision – Vivez l'art du toilettage.
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight" data-animate="fade-slide-up" data-delay="0">
+        Bienvenue chez Zacky<br><span class="text-gold">Barber</span>
+        </h1>
+        <p class="text-gray-300 max-w-md mb-8 text-sm sm:text-base leading-relaxed" data-animate="fade-slide-up" data-delay="150">
+          Où le style rencontre la précision – Vivez l'art du toilettage professionnel à Marrakech.
         </p>
         <div class="flex gap-4" data-animate="fade-slide-up" data-delay="300">
-          <a href="#services" class="bg-gold text-dark px-7 py-4 rounded-xl font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">Découvrez nos services</a>
+          <a href="#services" class="bg-gold text-dark px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg">Découvrez nos services</a>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="bg-gray-800 h-64 rounded-xl bg-cover bg-center hero-img" data-animate="slide-left" data-delay="200" style="background-image: url('./pictures/before.png');"></div>
-        <div class="bg-gray-700 h-64 rounded-xl bg-cover bg-center hero-img" data-animate="slide-right" data-delay="400" style="background-image: url('./pictures/after.png');"></div>
+      <div class="grid grid-cols-2 gap-3 sm:gap-4 h-full">
+        <div class="bg-gray-800 h-56 sm:h-64 rounded-xl bg-cover bg-center hero-img shadow-lg" data-animate="slide-left" data-delay="200" style="background-image: url('./pictures/2.jpeg');" title="Coupe avant - Avant d'arriver chez Saad"></div>
+        <div class="bg-gray-700 h-56 sm:h-64 rounded-xl bg-cover bg-center hero-img shadow-lg" data-animate="slide-right" data-delay="400" style="background-image: url('./pictures/6.jpeg');" title="Coupe après - Après un service chez Saad"></div>
       </div>
     </div>
   </section>
@@ -294,23 +349,23 @@
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="px-6 py-24 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/services.jpg');">
-    <h3 class="text-4xl font-bold text-center mb-16" data-animate="fade-slide-up" data-delay="0">Nos Services</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-      <div class="border border-white/10 p-10 rounded-2xl bg-black/60" data-animate="fade-slide-up" data-delay="150">
-        <img src="./pictures/scissors.png" alt="Ciseaux" class="w-16 h-16 mb-4 mx-auto">
-        <h4 class="text-gold text-xl mb-2">Coupe de cheveux précise</h4>
-        <p class="text-gray-400">Obtenez une coupe de cheveux nette et stylée adaptée à la forme de votre visage et à votre style personnel. Nos barbiers experts utilisent les meilleures techniques pour un look durable.</p>
+  <section id="services" class="px-4 sm:px-6 py-24 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/services.jpg');">
+    <h2 class="text-4xl sm:text-5xl font-bold text-center mb-16 sm:mb-20" data-animate="fade-slide-up" data-delay="0">Nos Services de Barbering</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 max-w-6xl mx-auto">
+      <div class="border border-white/20 p-8 sm:p-10 rounded-2xl bg-black/70 backdrop-blur-sm hover:border-gold transition-all duration-300 hover:shadow-xl hover:shadow-gold/20" data-animate="fade-slide-up" data-delay="150">
+        <img src="./pictures/scissors.png" alt="Ciseaux de barbier - Service de coupe de cheveux" class="w-16 h-16 mb-6 mx-auto drop-shadow-lg">
+        <h3 class="text-gold text-xl sm:text-2xl mb-3 font-semibold">Coupe de cheveux précise</h3>
+        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">Obtenez une coupe de cheveux nette et stylée adaptée à la forme de votre visage et à votre style personnel. Nos barbiers experts utilisent les meilleures techniques pour un look durable.</p>
       </div>
-      <div class="border border-white/10 p-10 rounded-2xl bg-black/60" data-animate="fade-slide-up" data-delay="300">
-        <img src="./pictures/beard.png" alt="Barbe" class="w-16 h-16 mb-4 mx-auto">
-        <h4 class="text-gold text-xl mb-2">Toilettage de barbe</h4>
-        <p class="text-gray-400">Entretenez votre barbe avec une taille, une forme et un conditionnement professionnels. Atteignez cet aspect robuste mais raffiné.</p>
+      <div class="border border-white/20 p-8 sm:p-10 rounded-2xl bg-black/70 backdrop-blur-sm hover:border-gold transition-all duration-300 hover:shadow-xl hover:shadow-gold/20" data-animate="fade-slide-up" data-delay="300">
+        <img src="./pictures/beard.png" alt="Symbole de barbe - Service de toilettage de barbe" class="w-16 h-16 mb-6 mx-auto drop-shadow-lg">
+        <h3 class="text-gold text-xl sm:text-2xl mb-3 font-semibold">Toilettage de barbe</h3>
+        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">Entretenez votre barbe avec une taille, une forme et un conditionnement professionnels. Atteignez cet aspect robuste mais raffiné.</p>
       </div>
-      <div class="border border-white/10 p-10 rounded-2xl bg-black/60" data-animate="fade-slide-up" data-delay="450">
-        <img src="./pictures/razor.png" alt="Rasoir" class="w-16 h-16 mb-4 mx-auto">
-        <h4 class="text-gold text-xl mb-2">Rasage classique</h4>
-        <p class="text-gray-400">Profitez d'un rasage traditionnel à la serviette chaude pour une peau la plus douce. Détendez-vous et profitez de l'expérience de toilettage ultime.</p>
+      <div class="border border-white/20 p-8 sm:p-10 rounded-2xl bg-black/70 backdrop-blur-sm hover:border-gold transition-all duration-300 hover:shadow-xl hover:shadow-gold/20" data-animate="fade-slide-up" data-delay="450">
+        <img src="./pictures/razor.png" alt="Rasoir droit - Service de rasage classique" class="w-16 h-16 mb-6 mx-auto drop-shadow-lg">
+        <h3 class="text-gold text-xl sm:text-2xl mb-3 font-semibold">Rasage classique</h3>
+        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">Profitez d'un rasage traditionnel à la serviette chaude pour une peau la plus douce. Détendez-vous et profitez de l'expérience de toilettage ultime.</p>
       </div>
     </div>
   </section>
@@ -321,27 +376,27 @@
   </section>
 
   <!-- GALLERY -->
-  <section id="gallery" class="px-6 py-24 bg-black">
-    <h3 class="text-4xl font-bold text-center mb-16" data-animate="fade-slide-up" data-delay="0">Notre Galerie</h3>
-    <p class="text-center text-gray-400 mb-8" data-animate="fade-slide-up" data-delay="150">Découvrez nos derniers travaux et transformations. Des coupes fraîches aux chefs-d'œuvre de barbe, voyez la différence chez Saad.</p>
+  <section id="gallery" class="px-4 sm:px-6 py-24 bg-black">
+    <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 sm:mb-6" data-animate="fade-slide-up" data-delay="0">Notre Galerie</h2>
+    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 text-sm sm:text-base" data-animate="fade-slide-up" data-delay="150">Découvrez nos derniers travaux et transformations. Des coupes fraîches aux chefs-d'œuvre de barbe, voyez la différence chez Zacky Barber.</p>
     <div class="gallery">
       <div class="slider">
-        <img src="./pictures/galery1.jpg" class="slide">
-        <img src="./pictures/galery2.jpg" class="slide">
-        <img src="./pictures/galery3.jpg" class="slide">
-        <img src="./pictures/galery4.jpg" class="slide">
+        <img src="./pictures/1.jpeg" alt="Galerie de travaux barbershop 1 - Exemple de coupe" class="slide">
+        <img src="./pictures/3.jpeg" alt="Galerie de travaux barbershop 2 - Style barbier" class="slide">
+        <img src="./pictures/4.jpeg" alt="Galerie de travaux barbershop 3 - Toilettage barbe" class="slide">
+        <img src="./pictures/5.jpeg" alt="Galerie de travaux barbershop 4 - Finition barbershop" class="slide">
       </div>
-      <button class="nav left"><</button>
-      <button class="nav right">></button>
+      <button class="nav left" aria-label="Image précédente"><</button>
+      <button class="nav right" aria-label="Image suivante">></button>
     </div>
   </section>
 
   <!-- VISIT US -->
-  <section id="visit-us" class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/about.webp');" data-animate="fade-slide-up" data-delay="0">
-    <div class="max-w-4xl mx-auto text-center bg-black/60 p-8 rounded-xl">
-      <h3 class="text-3xl font-bold mb-6">Nous Visiter</h3>
-      <p class="text-gray-400 mb-8">123 Rue de la Kasbah, Marrakech, Maroc · Ouvert tous les jours</p>
-      <a href="#" class="open-modal bg-gold text-dark px-8 py-4 rounded-xl font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">Réserver via WhatsApp</a>
+  <section id="visit-us" class="px-4 sm:px-6 py-24 sm:py-32 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/about.webp');" data-animate="fade-slide-up" data-delay="0">
+    <div class="max-w-4xl mx-auto text-center bg-black/75 p-8 sm:p-12 rounded-2xl backdrop-blur-sm">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Nous Visiter</h2>
+      <p class="text-gray-300 mb-8 text-sm sm:text-base">123 Rue de la Kasbah, Marrakech, Maroc · Ouvert tous les jours de 9h à 20h</p>
+      <a href="#" class="open-modal inline-block bg-gold text-dark px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg">Réserver via WhatsApp</a>
     </div>
   </section>
 
@@ -351,71 +406,14 @@
   </section>
 
   <!-- TESTIMONIALS -->
-  <section id="testimonials" class="px-6 py-24 bg-black">
-    <h3 class="text-4xl font-bold text-center mb-16" data-animate="fade-slide-up" data-delay="0">Ce Que Disent Nos Clients</h3>
-    <div class="max-w-6xl mx-auto overflow-hidden">
-      <div class="flex gap-8 no-scrollbar" style="width: calc(100% * 3); animation: scroll 20s linear infinite;">
-        <div class="flex-shrink-0 w-full flex gap-8">
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="150">
-            <img src="./pictures/before.png" alt="Client 1" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">abd l9ader</h4>
-            <p class="text-gray-400">"ta rah wa7ed l7sana wlah 7ta wa3ra welit jdid, ta7iya khoya Imad wlah ta a7san nas"</p>
-          </div>
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="300">
-            <img src="./pictures/after.png" alt="Client 2" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">amira</h4>
-            <p class="text-gray-400">"sara7a ma experience a etait tres magic avec frere Imad qui a fait mon coiffure, magnifique"</p>
-          </div>
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="450">
-            <img src="./pictures/about.webp" alt="Client 3" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">Mike Johnson</h4>
-            <p class="text-gray-400">"De la barbe à la coupe de cheveux, tout est de première qualité. Je n'irai nulle part ailleurs."</p>
-          </div>
-        </div>
-        <div class="flex-shrink-0 w-full flex gap-8">
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="150">
-            <img src="./pictures/before.png" alt="Client 1" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">John Doe</h4>
-            <p class="text-gray-400">"Saad Barbershop a transformé mon look ! L'attention aux détails est inégalée. Hautement recommandé !"</p>
-          </div>
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="300">
-            <img src="./pictures/about.webp" alt="Client 2" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">Jane Smith</h4>
-            <p class="text-gray-400">"Meilleur barbier en ville. Professionnel, amical, et les résultats parlent d'eux-mêmes."</p>
-          </div>
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="450">
-            <img src="./pictures/about.webp" alt="Client 3" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">Mike Johnson</h4>
-            <p class="text-gray-400">"De la barbe à la coupe de cheveux, tout est de première qualité. Je n'irai nulle part ailleurs."</p>
-          </div>
-        </div>
-        <div class="flex-shrink-0 w-full flex gap-8">
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="150">
-            <img src="./pictures/before.png" alt="Client 1" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">John Doe</h4>
-            <p class="text-gray-400">"Saad Barbershop a transformé mon look ! L'attention aux détails est inégalée. Hautement recommandé !"</p>
-          </div>
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="300">
-            <img src="./pictures/about.webp" alt="Client 2" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">Jane Smith</h4>
-            <p class="text-gray-400">"Meilleur barbier en ville. Professionnel, amical, et les résultats parlent d'eux-mêmes."</p>
-          </div>
-          <div class="border border-white/10 p-8 rounded-2xl bg-black/60 text-center min-w-80" data-animate="fade-slide-up" data-delay="450">
-            <img src="./pictures/about.webp" alt="Client 3" class="w-16 h-16 rounded-full mx-auto mb-4">
-            <h4 class="text-gold text-lg mb-2">Mike Johnson</h4>
-            <p class="text-gray-400">"De la barbe à la coupe de cheveux, tout est de première qualité. Je n'irai nulle part ailleurs."</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- CONTACT -->
-  <section id="contact" class="px-6 py-28 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/services.jpg');" data-animate="fade-slide-up" data-delay="0">
-    <div class="max-w-4xl mx-auto text-center bg-black/60 p-8 rounded-xl">
-      <h3 class="text-3xl font-bold mb-6">Contactez-Nous</h3>
-      <p class="text-gray-400 mb-8">Vous avez des questions ou besoin de réserver ? Contactez-nous.</p>
-      <a href="#" class="open-modal bg-gold text-dark px-8 py-4 rounded-xl font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">Réserver via WhatsApp</a>
+  <section id="contact" class="px-4 sm:px-6 py-24 sm:py-32 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/services.jpg');" data-animate="fade-slide-up" data-delay="0">
+    <div class="max-w-4xl mx-auto text-center bg-black/75 p-8 sm:p-12 rounded-2xl backdrop-blur-sm">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Contactez-Nous</h2>
+      <p class="text-gray-300 mb-8 text-sm sm:text-base">Vous avez des questions ou besoin de réserver ? Contactez-nous directement via WhatsApp pour un service rapide.</p>
+      <a href="#" class="open-modal inline-block bg-gold text-dark px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg">Réserver via WhatsApp</a>
     </div>
   </section>
 
@@ -425,23 +423,23 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="px-6 py-8 border-t border-white/10 text-center text-sm text-gray-500">
-    © 2025 Saad Barbershop · Tous droits réservés
-    <div class="flex justify-center gap-6 mt-4">
-      <a href="#"><img src="./pictures/insta-icon.png" alt="Instagram" class="h-6"></a>
-      <a href="#"><img src="./pictures/facebook.svg" alt="Facebook" class="h-6"></a>
-      <a href="#"><img src="./pictures/whatsapp.svg" alt="WhatsApp" class="h-6"></a>
-    </div>
+  <footer class="px-4 sm:px-6 py-8 border-t border-white/10 text-center text-xs sm:text-sm text-gray-500">
+    <p>© 2025 Zacky Barber - Barbier Professionnel à Marrakech · Tous droits réservés</p>
+    <nav class="flex justify-center gap-6 mt-4">
+      <a href="#" aria-label="Suivez-nous sur Instagram" class="hover:text-gold transition-colors duration-300"><img src="./pictures/insta-icon.png" alt="Logo Instagram Saad Barbershop" class="h-5 sm:h-6"></a>
+      <a href="#" aria-label="Suivez-nous sur Facebook" class="hover:text-gold transition-colors duration-300"><img src="./pictures/facebook.svg" alt="Logo Facebook Saad Barbershop" class="h-5 sm:h-6"></a>
+      <a href="#" aria-label="Contactez-nous sur WhatsApp" class="hover:text-gold transition-colors duration-300"><img src="./pictures/whatsapp.svg" alt="Logo WhatsApp Saad Barbershop" class="h-5 sm:h-6"></a>
+    </nav>
   </footer>
 
   <!-- BOOKING MODAL -->
-  <div id="bookingModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
-    <div class="bg-black p-8 rounded-xl max-w-md w-full">
-      <h3 class="text-2xl font-bold mb-4">Réservez votre rendez-vous</h3>
+  <div id="bookingModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden z-50">
+    <div class="bg-black p-8 sm:p-10 rounded-2xl max-w-md w-full mx-4 border border-white/20 shadow-2xl shadow-gold/10">
+      <h3 class="text-2xl sm:text-3xl font-bold mb-6">Réservez votre rendez-vous</h3>
       <form class="flex flex-col gap-4">
-        <input type="text" placeholder="Nom" class="p-3 rounded-xl bg-gray-800 border border-white/10">
-        <input type="tel" placeholder="Téléphone" class="p-3 rounded-xl bg-gray-800 border border-white/10">
-        <button class="bg-gold text-dark p-3 rounded-xl font-semibold hover:scale-105 transition-transform">Soumettre</button>
+        <input type="text" placeholder="Nom" class="p-3 rounded-xl bg-gray-900 border border-white/20 text-white placeholder-gray-500 focus:border-gold focus:outline-none transition-colors">
+        <input type="tel" placeholder="Téléphone" class="p-3 rounded-xl bg-gray-900 border border-white/20 text-white placeholder-gray-500 focus:border-gold focus:outline-none transition-colors">
+        <button class="bg-gold text-dark p-3 rounded-xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">Soumettre</button>
       </form>
     </div>
   </div>

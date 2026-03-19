@@ -152,46 +152,7 @@ window.addEventListener('scroll', () => {
   progressBar.style.width = `${scrollPercent}%`;
 });
 
-// Booking modal enhanced with better UX
-const modal = document.getElementById('bookingModal');
-const openModalBtns = document.querySelectorAll('.open-modal');
 
-if (modal && openModalBtns.length > 0) {
-  openModalBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
-  });
-
-  const bookingForm = modal.querySelector('form');
-  if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = bookingForm.querySelector('input[type="text"]').value.trim();
-      const phone = bookingForm.querySelector('input[type="tel"]').value.trim();
-
-      if (name && phone) {
-        const message = `Bonjour, je m'appelle ${name}. Je souhaite réserver un rendez-vous.`;
-        const whatsappUrl = `https://wa.me/212XXXXXXXXX?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        modal.classList.add('hidden');
-        bookingForm.reset();
-        document.body.style.overflow = 'auto';
-      } else {
-        alert('Veuillez remplir tous les champs.');
-      }
-    });
-  }
-}
 
 // Animate elements on scroll
 const observerOptions = {

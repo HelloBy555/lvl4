@@ -71,9 +71,9 @@
     },
 "https://zackybarber.com",
     "sameAs": [
-      "https://www.instagram.com/zackybarber",
+      "https://www.instagram.com/zamo_rano0/?hl=fr",
       "https://www.facebook.com/zackybarber",
-      "https://wa.me/212XXXXXXXXX"
+      "https://wa.me/212778091586"
     ],
     "priceRange": "$$",
     "openingHours": "Mo-Su 09:00-20:00",
@@ -257,8 +257,8 @@
           const phone = bookingForm.querySelector('input[type="tel"]').value.trim();
 
           if (name && phone) {
-            const message = `Bonjour, je m'appelle ${name}. Je souhaite réserver un rendez-vous.`;
-            const whatsappUrl = `https://wa.me/212XXXXXXXXX?text=${encodeURIComponent(message)}`; // Replace with actual number
+            const message = `Bonjour, Je suis ${name}. Mon numéro est ${phone}. Je veux cet service`;
+            const whatsappUrl = `https://wa.me/212778091586?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             modal.classList.add('hidden');
             bookingForm.reset();
@@ -395,8 +395,8 @@
   <section id="visit-us" class="px-4 sm:px-6 py-24 sm:py-32 bg-black bg-cover bg-center relative" style="background-image: url('./pictures/about.webp');" data-animate="fade-slide-up" data-delay="0">
     <div class="max-w-4xl mx-auto text-center bg-black/75 p-8 sm:p-12 rounded-2xl backdrop-blur-sm">
       <h2 class="text-3xl sm:text-4xl font-bold mb-6">Nous Visiter</h2>
-      <p class="text-gray-300 mb-8 text-sm sm:text-base">123 Rue de la Kasbah, Marrakech, Maroc · Ouvert tous les jours de 9h à 20h</p>
-      <a href="#" class="open-modal inline-block bg-gold text-dark px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg">Réserver via WhatsApp</a>
+      <p class="text-gray-300 mb-8 text-sm sm:text-base">Devant la jardin de Abwab Gueliz, Marrakech 30100.</p>
+      <a href="https://maps.app.goo.gl/F6JkHM9ANS7eR3zs5" target="_blank" class="inline-block bg-gold text-dark px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg">Voir sur Maps</a>
     </div>
   </section>
 
@@ -426,9 +426,8 @@
   <footer class="px-4 sm:px-6 py-8 border-t border-white/10 text-center text-xs sm:text-sm text-gray-500">
     <p>© 2025 Zacky Barber - Barbier Professionnel à Marrakech · Tous droits réservés</p>
     <nav class="flex justify-center gap-6 mt-4">
-      <a href="#" aria-label="Suivez-nous sur Instagram" class="hover:text-gold transition-colors duration-300"><img src="./pictures/insta-icon.png" alt="Logo Instagram Saad Barbershop" class="h-5 sm:h-6"></a>
-      <a href="#" aria-label="Suivez-nous sur Facebook" class="hover:text-gold transition-colors duration-300"><img src="./pictures/facebook.svg" alt="Logo Facebook Saad Barbershop" class="h-5 sm:h-6"></a>
-      <a href="#" aria-label="Contactez-nous sur WhatsApp" class="hover:text-gold transition-colors duration-300"><img src="./pictures/whatsapp.svg" alt="Logo WhatsApp Saad Barbershop" class="h-5 sm:h-6"></a>
+      <a href="https://www.instagram.com/zamo_rano0/?hl=fr" target="_blank" aria-label="Suivez-nous sur Instagram" class="hover:text-gold transition-colors duration-300"><img src="./pictures/insta-icon.png" alt="Logo Instagram Zacky Barbershop" class="h-5 sm:h-6"></a>
+      <a href="https://wa.me/212778091586" target="_blank" aria-label="Contactez-nous sur WhatsApp" class="hover:text-gold transition-colors duration-300"><img src="./pictures/whatsapp-icon.png" alt="Logo WhatsApp Zacky Barbershop" class="h-5 sm:h-6"></a>
     </nav>
   </footer>
 
